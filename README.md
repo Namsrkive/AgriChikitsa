@@ -1,8 +1,7 @@
-<div align="center">
-## AgriChikitsa
-### Crop disease Detection by leaf image classification
 
-</div>
+## AgriChikitsa
+### [Crop disease Detection by leaf image classification]
+
 
 ## Abstract
 
