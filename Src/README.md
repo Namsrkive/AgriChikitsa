@@ -2,7 +2,7 @@
 ### Details About the code
 
 * The .ipynb file contains the complete code from loading the images to training,evaluation and prediction of the model.<br/>
-* The code has has been written using PyTorch framework in jupyter notebook.
+* The code has has been written using PyTorch framework in google colab.
 
 
 ### List of Plants and Diseases that the model can detect
