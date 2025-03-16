@@ -22,18 +22,20 @@ CLASS_NAMES = [
 ]
 
 # Load trained model
-import os
-from model import load_model  # Ensure correct import
+from model import load_model, predict
 
-# Get absolute path of the model file
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "crop_disease_detection.pth")
+# Example usage
+model = load_model("crop_disease_detection.pth", num_classes=38)
 
-# Check if file exists
-if not os.path.exists(MODEL_PATH):
-    raise FileNotFoundError(f"Model file not found: {MODEL_PATH}")
+# Assuming you have a class names list:
+class_names = ["Class1", "Class2", ..., "Class38"]  # Replace with your actual class names
 
-# Load model
-model = load_model(MODEL_PATH, num_classes=len(CLASS_NAMES))
+# Make a prediction on an image
+image = Image.open("path_to_your_image.jpg")  # Load your image
+predicted_class, probability = predict(image, model, class_names)
+
+# Output the result
+print(f"Predicted class: {predicted_class}, Probability: {probability}")
 
 
 # Streamlit UI
