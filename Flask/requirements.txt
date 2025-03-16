@@ -1,10 +1,5 @@
-
-pandas
-
-https://download.pytorch.org/whl/cpu/torch-1.8.0%2Bcpu-cp36-cp36m-linux_x86_64.whl
-https://download.pytorch.org/whl/cpu/torchvision-0.9.0%2Bcpu-cp36-cp36m-linux_x86_64.whl
-
 Flask==2.3.2
 gunicorn==20.1.0
-numpy==1.23.5
+torch==2.0.1
+torchvision==0.15.2
 Pillow==9.5.0
