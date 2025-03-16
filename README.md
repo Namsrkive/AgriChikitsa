@@ -39,8 +39,8 @@ This process for building a model which can detect the disease associated with t
    
    <img src="" alt="index1" height="300px"/> 
    <div>
-   <img src="./Assets/out1.png" alt="index2" height="300px" width="450"/>
-   <img src="./Assets/out2.png" alt="index3" height="300px"  width="450"/>
+   <img src="./Assets/index1.png" alt="index2" height="300px" width="450"/>
+   <img src="./Assets/index2.png" alt="index3" height="300px"  width="450"/>
    </div>
 <!--
 
