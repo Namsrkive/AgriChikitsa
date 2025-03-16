@@ -37,7 +37,7 @@ This process for building a model which can detect the disease associated with t
    The model was tested on total 17572 images of 38 classes.<br/>
    The model used for prediction on sample images. It can be seen below:
    
-   <img src="" alt="index1" height="300px"/> 
+
    <div>
    <img src="./Assets/index1.png" alt="index2" height="300px" width="450"/>
    <img src="./Assets/index2.png" alt="index3" height="300px"  width="450"/>
