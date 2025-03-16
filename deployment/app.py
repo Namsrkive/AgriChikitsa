@@ -22,7 +22,19 @@ CLASS_NAMES = [
 ]
 
 # Load trained model
-model = load_model("crop_disease_detection.pth", num_classes=len(CLASS_NAMES))
+import os
+from model import load_model  # Ensure correct import
+
+# Get absolute path of the model file
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "crop_disease_detection.pth")
+
+# Check if file exists
+if not os.path.exists(MODEL_PATH):
+    raise FileNotFoundError(f"Model file not found: {MODEL_PATH}")
+
+# Load model
+model = load_model(MODEL_PATH, num_classes=len(CLASS_NAMES))
+
 
 # Streamlit UI
 st.set_page_config(page_title="Crop Disease Detection", layout="wide")
