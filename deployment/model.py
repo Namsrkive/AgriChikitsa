@@ -18,7 +18,7 @@ class CropDiseaseModel(nn.Module):
 # Load the model
 def load_model(model_path="crop_disease_detection.pth", num_classes=38):
     model = CropDiseaseModel(num_classes)
-    model.load_state_dict(torch.load(model_path, map_location=torch.device("cpu")))
+    model.load_state_dict(torch.load(model_path, map_location=torch.device("cuda")))
     model.eval()
     return model
 
