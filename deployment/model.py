@@ -3,6 +3,7 @@ import torch.nn as nn
 import torchvision.transforms as transforms
 import torchvision.models as models
 from PIL import Image
+import os
 
 # Define the model architecture
 class CropDiseaseModel(nn.Module):
@@ -15,9 +16,7 @@ class CropDiseaseModel(nn.Module):
     def forward(self, x):
         return self.model(x)
 
-import os
-import torch
-
+# Load model function
 def load_model(model_path="crop_disease_detection.pth", num_classes=38):
     model_path = os.path.join(os.path.dirname(__file__), model_path)  # Ensure correct path
 
@@ -25,14 +24,11 @@ def load_model(model_path="crop_disease_detection.pth", num_classes=38):
         raise FileNotFoundError(f"Model file not found at: {model_path}")
 
     model = CropDiseaseModel(num_classes)
-    model.load_state_dict(torch.load(model_path, map_location=torch.device("cuda" if torch.cuda.is_available() else "cpu")))
-    model.eval()
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.load_state_dict(torch.load(model_path, map_location=device))
+    model.to(device)  # Move model to the correct device
+    model.eval()  # Set the model to evaluation mode
     return model
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model.load_state_dict(torch.load(model_path, map_location=device))
-model.to(device)  # Move model to the same device
-
 
 # Image preprocessing function
 def transform_image(image):
