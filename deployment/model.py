@@ -1,49 +1,47 @@
 import torch
 import torch.nn as nn
-import torchvision.transforms as transforms
-import torchvision.models as models
-from PIL import Image
-import os
 
-# Define the model architecture
 class CropDiseaseModel(nn.Module):
-    def __init__(self, num_classes=38):  # Adjust num_classes based on dataset
+    def __init__(self, num_classes=38):
         super(CropDiseaseModel, self).__init__()
-        self.model = models.resnet18(pretrained=False)
-        in_features = self.model.fc.in_features
-        self.model.fc = nn.Linear(in_features, num_classes)
+        # Example of model architecture
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=3, padding=1)
+        self.bn1 = nn.BatchNorm2d(64)
+        self.layer1 = self._make_layer(64, 128)
+        self.layer2 = self._make_layer(128, 256)
+        self.fc = nn.Linear(256, num_classes)
+
+    def _make_layer(self, in_channels, out_channels):
+        layers = [
+            nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1),
+            nn.BatchNorm2d(out_channels),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2)
+        ]
+        return nn.Sequential(*layers)
 
     def forward(self, x):
-        return self.model(x)
+        x = self.bn1(self.conv1(x))
+        x = torch.relu(x)
+        x = self.layer1(x)
+        x = self.layer2(x)
+        x = torch.flatten(x, 1)
+        x = self.fc(x)
+        return x
 
-# Load model function
-def load_model(model_path="crop_disease_detection.pth", num_classes=38):
-    model_path = os.path.join(os.path.dirname(__file__), model_path)  # Ensure correct path
-
-    if not os.path.exists(model_path):
-        raise FileNotFoundError(f"Model file not found at: {model_path}")
-
-    model = CropDiseaseModel(num_classes)
+def load_model(model_path, num_classes=38):
+    model = CropDiseaseModel(num_classes=num_classes)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.load_state_dict(torch.load(model_path, map_location=device))
-    model.to(device)  # Move model to the correct device
-    model.eval()  # Set the model to evaluation mode
+    
+    # Load the state_dict and map it to the model
+    checkpoint = torch.load(model_path, map_location=device)
+    
+    # The issue comes from mismatching keys in the saved state_dict, we need to handle that
+    # Fix key names in the checkpoint (e.g., 'network.' prefix in the keys)
+    checkpoint = {key.replace('network.', ''): value for key, value in checkpoint.items()}
+    
+    model.load_state_dict(checkpoint)
+    model.to(device)
+    model.eval()
     return model
-
-# Image preprocessing function
-def transform_image(image):
-    transform = transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
-    return transform(image).unsqueeze(0)  # Add batch dimension
-
-# Predict function
-def predict(image, model, class_names):
-    image_tensor = transform_image(image)
-    with torch.no_grad():
-        output = model(image_tensor)
-    probabilities = torch.nn.functional.softmax(output[0], dim=0)
-    predicted_class = torch.argmax(probabilities).item()
-    return class_names[predicted_class], probabilities[predicted_class].item()
+model = load_model("crop_disease_detection.pth", num_classes=38)
