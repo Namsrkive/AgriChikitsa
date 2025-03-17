@@ -6,7 +6,7 @@ from PIL import Image
 import io
 
 
-class Plant_Disease_Model(nn.Module):
+class Crop_Disease_Model(nn.Module):
 
     def __init__(self):
         super().__init__()
@@ -27,9 +27,9 @@ num_classes = ['Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_r
                'Pepper,_bell___Bacterial_spot', 'Pepper,_bell___healthy', 'Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy', 'Raspberry___healthy', 'Soybean___healthy', 'Squash___Powdery_mildew', 'Strawberry___Leaf_scorch', 'Strawberry___healthy', 'Tomato___Bacterial_spot', 'Tomato___Early_blight', 'Tomato___Late_blight', 'Tomato___Leaf_Mold', 'Tomato___Septoria_leaf_spot', 'Tomato___Spider_mites Two-spotted_spider_mite', 'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus', 'Tomato___healthy']
 
 
-model = Plant_Disease_Model()
+model = Crop_Disease_Model()
 model.load_state_dict(torch.load(
-    './Models/plantDisease-resnet34.pth', map_location=torch.device('cpu')))
+    './Models/crop_disease_detection.pth', map_location=torch.device('cpu')))
 model.eval()
 
 
