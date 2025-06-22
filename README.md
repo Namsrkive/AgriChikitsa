@@ -6,6 +6,7 @@
    <img src="./Assets/Picture1.jpg" alt="index2" height="450px" width="1100"/>
    <img src="./Assets/Picture2.jpg" alt="index3" height="450px"  width="1100"/>
    </div>
+
 ## Abstract
 
 Crop diseases pose a critical challenge to agricultural productivity, leading to significant crop losses and economic setbacks for farmers. 
