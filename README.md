@@ -2,7 +2,10 @@
 ## AgriChikitsa
 ### [Crop disease Detection by leaf image classification]
 
-
+<div>
+   <img src="./Assets/Picture1.png" alt="index2" height="300px" width="450"/>
+   <img src="./Assets/Picture2.png" alt="index3" height="300px"  width="450"/>
+   </div>
 ## Abstract
 
 Crop diseases pose a critical challenge to agricultural productivity, leading to significant crop losses and economic setbacks for farmers. 
