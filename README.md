@@ -3,8 +3,8 @@
 ### [Crop disease Detection by leaf image classification]
 
 <div>
-   <img src="./Assets/Picture1.jpg" alt="index2" height="300px" width="450"/>
-   <img src="./Assets/Picture2.jpg" alt="index3" height="300px"  width="450"/>
+   <img src="./Assets/Picture1.jpg" alt="index2" height="250px" width="500"/>
+   <img src="./Assets/Picture2.jpg" alt="index3" height="250px"  width="500"/>
    </div>
 ## Abstract
 
